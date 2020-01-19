@@ -21,9 +21,9 @@ uniapp开关组件，支持双向数据绑定，支持切换前事件拦截
 | size | 大小（单位px） | number | - | 30 |
 | active-value | 打开时的value值 | string/number/boolean | - | true |
 | inactive-value | 关闭时的value值 | string/number/boolean | - | false |
-| before-change | 开关状态切换前的钩子，如果返回false或者返回Promise且被reject，则状态不会被切换 | Function(e) | - | - |
+| before-change | 开关状态切换前的钩子，如果返回false或者返回Promise且被reject，则状态不会被切换 | Function(nextStatus) | - | - |
 
-### evan-checkbox events
+### evan-switch events
 | name | 说明 | 回调参数 |
 | :--- | :---------------- | ------------------|
 | change | 开关状态变更 | 变更后的状态 |
