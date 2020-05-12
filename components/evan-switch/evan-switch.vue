@@ -39,7 +39,8 @@
 			beforeChange: {
 				type: Function,
 				default: null
-			}
+			},
+			extraData: null
 		},
 		computed: {
 			switchHeight() {
@@ -68,7 +69,8 @@
 			toggle() {
 				if (!this.disabled) {
 					if (this.beforeChange && typeof this.beforeChange === 'function') {
-						const result = this.beforeChange(this.currentValue === this.activeValue ? this.inactiveValue : this.activeValue)
+						const result = this.beforeChange(this.currentValue === this.activeValue ? this.inactiveValue : this.activeValue,
+							this.extraData)
 						if (typeof result === 'object') {
 							result.then(() => {
 								this.toggleValue()

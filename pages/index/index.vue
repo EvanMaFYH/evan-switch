@@ -29,6 +29,12 @@
 		</view>
 		<evan-switch v-model="checked" :beforeChange="beforeChangePromise"></evan-switch>
 
+		<view class="evan-switch-show__title">
+			<text class="evan-switch-show__title__item">循环switch，第二个拦截</text>
+		</view>
+		<block v-for="(item,index) in switchList" :key="index">
+			<evan-switch v-model="item.value" :extraData="index" :beforeChange="beforeListChange"></evan-switch>
+		</block>
 		<!-- #ifdef APP-PLUS -->
 		<button @click="goNvue">nvue页面</button>
 		<!-- #endif -->
@@ -44,7 +50,23 @@
 		data() {
 			return {
 				checked: true,
-				customChecked: 'value1'
+				customChecked: 'value1',
+				switchList: [{
+						value: true
+					},
+					{
+						value: false
+					},
+					{
+						value: false
+					},
+					{
+						value: false
+					},
+					{
+						value: true
+					},
+				]
 			}
 		},
 		onLoad() {
@@ -72,7 +94,13 @@
 					})
 				})
 			},
-			onChagne(e){
+			beforeListChange(e, extraData) {
+				if (extraData === 1) {
+					return false
+				}
+				return true
+			},
+			onChagne(e) {
 				console.log(e)
 			},
 			goNvue(nv) {

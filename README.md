@@ -22,8 +22,9 @@ uniapp开关组件，支持双向数据绑定，支持切换前事件拦截
 | active-value | 打开时的value值 | string/number/boolean | - | true |
 | inactive-value | 关闭时的value值 | string/number/boolean | - | false |
 | before-change | 开关状态切换前的钩子，如果返回false或者返回Promise且被reject，则状态不会被切换 | Function(nextStatus) | - | - |
+| extra-data | 需要传递给组件的额外属性，通常配合before-change使用，在循环switch组件拦截的时候判断是哪一个swtich触发的 | any | - | - |
 
 ### evan-switch events
 | name | 说明 | 回调参数 |
 | :--- | :---------------- | ------------------|
-| change | 开关状态变更 | 变更后的状态 |
+| change | 开关状态变更 | 第一个是变更后的状态，第二个是传递的extraData参数 |
