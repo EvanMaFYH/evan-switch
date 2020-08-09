@@ -23,7 +23,7 @@ uniapp开关组件，支持双向数据绑定，支持切换前事件拦截
 | inactive-value | 关闭时的value值 | string/number/boolean | - | false |
 | before-change | 开关状态切换前的钩子，如果返回false或者返回Promise且被reject，则状态不会被切换，第一个参数为将要切换的状态，第二个参数为传递给组件的extraData | Function(nextStatus, extraData) | - | - |
 | extra-data | 需要传递给组件的额外属性，通常配合before-change使用，在循环switch组件拦截的时候判断是哪一个swtich触发的 | any | - | - |
-| context-level | 组件深度，主要用于获取使用组件页面的实例(由于[uniapp的bug](https://github.com/dcloudio/uni-app/issues/1261)导致当function作为prop传递给组件时，function内部的实例是组件的实例而不是使用组件页面的实例)，该深度在不同平台可能不同，比如在h5和微信小程序中，页面中直接使用该组件而没有嵌套其他组件时微信小程序是1而h5是2 | number | - | 1 |
+| context-level | 组件深度，主要用于在before-change中获取使用组件页面的实例(由于[uniapp的bug](https://github.com/dcloudio/uni-app/issues/1261)导致当function作为prop传递给组件时，function内部的实例是组件的实例而不是使用组件页面的实例)，该深度在不同平台可能不同，比如在h5和微信小程序中，页面中直接使用该组件而没有嵌套其他组件时微信小程序是1而h5是2 | number | - | 1 |
 
 ### evan-switch events
 | name | 说明 | 回调参数 |
