@@ -40,7 +40,11 @@
 				type: Function,
 				default: null
 			},
-			extraData: null
+			extraData: null,
+			contextLevel: {
+				type: Number,
+				default: 1
+			}
 		},
 		computed: {
 			switchHeight() {
@@ -69,8 +73,12 @@
 			toggle() {
 				if (!this.disabled) {
 					if (this.beforeChange && typeof this.beforeChange === 'function') {
+						let context = this
+						for (let i = 0; i < this.contextLevel; i++) {
+							context = context.$options.parent
+						}
 						const result = this.beforeChange(this.currentValue === this.activeValue ? this.inactiveValue : this.activeValue,
-							this.extraData)
+							this.extraData, context)
 						if (typeof result === 'object') {
 							result.then(() => {
 								this.toggleValue()

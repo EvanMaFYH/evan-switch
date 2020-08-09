@@ -33,8 +33,13 @@
 			<text class="evan-switch-show__title__item">循环switch，第二个拦截</text>
 		</view>
 		<block v-for="(item,index) in switchList" :key="index">
-			<evan-switch v-model="item.value" :extraData="index" :beforeChange="beforeListChange"></evan-switch>
+			<evan-switch v-model="item.value" :extraData="index" :contextLevel="1" :beforeChange="beforeListChange"></evan-switch>
 		</block>
+		<view class="evan-switch-show__title">
+			<text class="evan-switch-show__title__item">在beforeChange中获取当前页面实例（uniapp bug导致在beforeChange中拿到的是组件的实例）</text>
+		</view>
+		<evan-switch v-model="contextChecked" :contextLevel="contextLevel" :beforeChange="beforeChangeContext"></evan-switch>
+
 		<!-- #ifdef APP-PLUS -->
 		<button @click="goNvue">nvue页面</button>
 		<!-- #endif -->
@@ -66,7 +71,15 @@
 					{
 						value: true
 					},
-				]
+				],
+				contextChecked: false,
+				currentPageData: 'this is the current page data',
+				// #ifdef H5
+				contextLevel: 2,
+				// #endif
+				// #ifndef H5
+				contextLevel: 1
+				// #endif
 			}
 		},
 		onLoad() {
@@ -99,6 +112,12 @@
 					return false
 				}
 				return true
+			},
+			beforeChangeContext(e, extraData, context) {
+				uni.showToast({
+					icon: 'none',
+					title: context.currentPageData
+				})
 			},
 			onChagne(e) {
 				console.log(e)
